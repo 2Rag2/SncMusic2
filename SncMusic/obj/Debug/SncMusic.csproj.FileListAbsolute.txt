@@ -32,7 +32,6 @@ C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.FrmAlun
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.FrmPrincipal.resources
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.Properties.Resources.resources
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.GenerateResource.cache
-C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.CoreCompileInputs.cache
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.CopyComplete
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.exe
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.pdb
@@ -56,3 +55,4 @@ C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.Gener
 C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.CopyComplete
 C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.exe
 C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.pdb
+C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\bin\Debug\Ubiety.Dns.Core.dll

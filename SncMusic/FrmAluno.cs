@@ -65,22 +65,17 @@ namespace SncMusic
                 //se txtid for diferente de vazio então consulte o aluno
                 if (txtId.Text != string.Empty)
                 {
-                    //consultar o aluno
-                    var comm = Banco.Abrir();
-                    comm.CommandText = "select* from tb_aluno where id_aluno = " + txtId.Text;
-                    var dr = comm.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        txtNome.Text = dr.GetString(1);
-                        txtEmail.Text = dr.GetString(4);
-                        mskCPF.Text = dr.GetString(2);
-                        mskTelefone.Text = dr.GetString(5);
-                        if (dr.GetString(3) == "M")
-                            rdbMasculino.Checked = true;
-                        else
-                            rdbFeminino.Checked = true;
+                    Aluno aluno = new Aluno();
+                    aluno.ConsultarPorId(Convert.ToInt32(txtId.Text));
+                    txtEmail.Text = aluno.Email;
+                    mskCPF.Text = aluno.cpf;
+                    mskTelefone.Text = aluno.Telefone;
+                    txtNome.Text = aluno.Nome;
+                    if (aluno.sexo == "M")
+                        rdbMasculino.Checked = true;
+                    else
+                        rdbFeminino.Checked = true;
 
-                    }
                     //altee o texto do botão para"..."
                     btnBuscar.Text = "...";
                     //tornar o txtid enable flase
@@ -110,14 +105,24 @@ namespace SncMusic
             if (rdbMasculino.Checked) sexo = "M";
             else sexo = "F"; // resolve o sexo
             mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            Aluno aluno = new Aluno();
+            if (aluno.alterar(new Aluno(Convert.ToInt32(txtId.Text), txtNome.Text, sexo, mskTelefone.Text)))
+            { 
+                //var comm = Banco.Abrir();
+                //comm.CommandText = "update tb_aluno set nome_aluno = '" + txtNome.Text + "'," +
+                //    "sexo_aluno = '" + sexo + "', telefone_aluno = '" + mskTelefone.Text +
+                //    "'where id_aluno = " + txtId.Text;
+                //comm.ExecuteNonQuery();
+                //comm.Connection.Close();
+                MessageBox.Show("Dados do aluno alterados com Sucesso!");
+            LimpaControles();
 
-            var comm = Banco.Abrir();
-            comm.CommandText = "update tb_aluno set nome_aluno = '" + txtNome.Text + "'," +
-                "sexo_aluno = '" + sexo + "', telefone_aluno = '" + mskTelefone.Text +
-                "'where id_aluno = " + txtId.Text;
-            comm.ExecuteNonQuery();
-            comm.Connection.Close();
-            MessageBox.Show("Dados do aluno alterados com Sucesso!");
+            }
+            else
+            {
+                MessageBox.Show("erro");
+            }
+
 
         }
 
@@ -161,6 +166,21 @@ namespace SncMusic
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            Aluno aluno = new Aluno();
+            var lista = aluno.ListarTodos();
+            foreach(var item in lista)
+            {
+                listBox1.Items.Add(item.Nome);
+            }
+           
+        }
 
-}
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

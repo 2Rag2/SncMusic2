@@ -17,7 +17,7 @@ namespace SncMusic
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new FrmPrincipal());
-            Application.Run(new FrmAluno());
+            Application.Run(new FrmPrincipal());
         }
     }
 }

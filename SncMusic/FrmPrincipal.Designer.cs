@@ -43,6 +43,7 @@
             this.manutençãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.novoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +98,8 @@
             // 
             // professoresToolStripMenuItem
             // 
+            this.professoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.novoToolStripMenuItem1});
             this.professoresToolStripMenuItem.Name = "professoresToolStripMenuItem";
             this.professoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.professoresToolStripMenuItem.Text = "&Professores";
@@ -149,6 +152,13 @@
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.sairToolStripMenuItem.Text = "&Sair";
             // 
+            // novoToolStripMenuItem1
+            // 
+            this.novoToolStripMenuItem1.Name = "novoToolStripMenuItem1";
+            this.novoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.novoToolStripMenuItem1.Text = "Novo";
+            this.novoToolStripMenuItem1.Click += new System.EventHandler(this.novoToolStripMenuItem1_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +194,7 @@
         private System.Windows.Forms.ToolStripMenuItem cursosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuáriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turmasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem novoToolStripMenuItem1;
     }
 }
 

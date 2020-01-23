@@ -17,15 +17,18 @@ namespace SncMusic
             InitializeComponent();
         }
 
-        private void txtId_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            if (txtId.Text != string.Empty)
+          
+            mskCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
 
-                btnAlterar.Enabled = true;
+            Professor professor = new Professor( txtNome.Text , mskCPF.Text, txtEmail.Text, mskTelefone.Text);
+            professor.Inserir();
 
-            else
+            MessageBox.Show("professor Gravado com Sucesso!");
+            LimpaControles();
 
-                btnAlterar.Enabled = false;
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -46,25 +49,16 @@ namespace SncMusic
             //senao
             else
             {
-                //se txtid for diferente de vazio então consulte o aluno
+                //se txtid for diferente de vazio então consulte o professor
                 if (txtId.Text != string.Empty)
                 {
-                    //consultar o aluno
-                    var comm = Banco.Abrir();
-                    comm.CommandText = "select* from tb_professor where id_professor = " + txtId.Text;
-                    var dr = comm.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        txtNome.Text = dr.GetString(1);
-                        txtEmail.Text = dr.GetString(4);
-                        mskCPF.Text = dr.GetString(2);
-                        mskTelefone.Text = dr.GetString(5);
-                        if (dr.GetString(3) == "M")
-                            rdbMasculino.Checked = true;
-                        else
-                            rdbFeminino.Checked = true;
-
-                    }
+                    Professor professor = new Professor();
+                    professor.ConsultarPorId(Convert.ToInt32(txtId.Text));
+                    txtEmail.Text = professor.Email;
+                    mskCPF.Text = professor.cpf;
+                    mskTelefone.Text = professor.Telefone;
+                    txtNome.Text = professor.Nome;
+                   
                     //altee o texto do botão para"..."
                     btnBuscar.Text = "...";
                     //tornar o txtid enable flase
@@ -72,66 +66,55 @@ namespace SncMusic
                     //tornar o textid readonly true
                     txtId.ReadOnly = true;
                 }
+
+            }
+        }
+
+        private void txtId_TextChanged(object sender, EventArgs e)
+        {
+            if (txtId.Text != string.Empty)
+            {
+                btnAlterar.Enabled = true;
+            }
+            else
+            {
+                btnAlterar.Enabled = false;
             }
         }
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-            string sexo;
-            if (rdbMasculino.Checked) sexo = "M";
-            else sexo = "F"; // resolve o sexo
+            
+          
             mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-
-            var comm = Banco.Abrir();
-            comm.CommandText = "update tb_professor set nome_professor = '" + txtNome.Text + "'," +
-                "sexo_professor = '" + sexo + "', telefone_professor = '" + mskTelefone.Text +
-                "'where id_professor = " + txtId.Text;
-            comm.ExecuteNonQuery();
-            comm.Connection.Close();
-            MessageBox.Show("Dados do aluno alterados com Sucesso!");
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string sexo;
-            if (rdbMasculino.Checked) sexo = "M";
-            else sexo = "F"; // resolve o sexo
-            mskCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-
-            var comm = Banco.Abrir();
-            comm.CommandText = "INSERT INTO tb_professor VALUES (0,'" +
-                txtNome.Text + "','" +
-                mskCPF.Text + "','" +
-                sexo + "','" +
-                txtEmail.Text + "','" +
-                mskTelefone.Text + "',default);";
-            comm.ExecuteNonQuery();
-            comm.CommandText = "select @@identity";
-            txtId.Text = comm.ExecuteScalar().ToString();
-            comm.Connection.Close();
-            MessageBox.Show("Professor Gravado com sucesso!");
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var msg = MessageBox.Show("Deseja realmente Excluir o aluno ",
-                "Excluir Professor ...",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-            if (msg == DialogResult.Yes  && txtId.Text != string.Empty)
+            Professor professor = new Professor();
+            if (professor.alterar(new Professor(Convert.ToInt32(txtId.Text), txtNome.Text, mskTelefone.Text)))
             {
-                var comm = Banco.Abrir();
-                comm.CommandText = "delete from tb_professor where id_professor =" + txtId.Text;
-                comm.ExecuteNonQuery();
-                MessageBox.Show("Professor excluido com Sucesso!");
+                //var comm = Banco.Abrir();
+                //comm.CommandText = "update tb_professor set nome_professor = '" + txtNome.Text + "'," +
+                //    "sexo_professor = '" + sexo + "', telefone_professor = '" + mskTelefone.Text +
+                //    "'where id_professor = " + txtId.Text;
+                //comm.ExecuteNonQuery();
+                //comm.Connection.Close();
+                MessageBox.Show("Dados do professor alterados com Sucesso!");
                 LimpaControles();
 
-                
             }
-                
-            
+            else
+            {
+                MessageBox.Show("erro");
+            }
+
+
+        }
+
+        private void Frmprofessor_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
 
         }
         private void LimpaControles()
@@ -140,13 +123,26 @@ namespace SncMusic
             txtEmail.Clear();
             txtNome.Clear();
             mskCPF.Clear();
-            mskTelefone.Clear();
-            rdbFeminino.Checked = false;
-            rdbMasculino.Checked = false;
+            mskTelefone.Clear();       
             txtId.Focus();
 
+        }
 
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void txtId_TextChanged_1(object sender, EventArgs e)
+        {
+            if (txtId.Text != string.Empty)
+            {
+                btnAlterar.Enabled = true;
+            }
+            else
+            {
+                btnAlterar.Enabled = false;
+            }
         }
     }   
     

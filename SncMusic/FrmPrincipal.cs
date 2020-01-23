@@ -23,5 +23,13 @@ namespace SncMusic
             frmAluno.MdiParent = this;
             frmAluno.Show();
         }
+
+        private void novoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FrmProfessor frmprofessor = new FrmProfessor();
+            frmprofessor.MdiParent = this;
+            frmprofessor.Show();
+
+        }
     }
 }
