@@ -56,3 +56,5 @@ C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.csproj.CopyC
 C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.exe
 C:\Users\wagner.surivi\Desktop\SncMusic\SncMusic\obj\Debug\SncMusic.pdb
 C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.FrmCurso.resources
+C:\Users\wagner.surivi\source\repos\SncMusic\SncMusic\obj\Debug\SncMusic.FrmUsuario.resources

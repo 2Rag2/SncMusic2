@@ -63,12 +63,23 @@
   <ItemGroup>
     <Compile Include="Aluno.cs" />
     <Compile Include="Curso.cs" />
+    <Compile Include="FrmMatricula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMatricula.Designer.cs">
+      <DependentUpon>FrmMatricula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Matricula.cs" />
     <Compile Include="Professor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmMatricula.resx">
+      <DependentUpon>FrmMatricula.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

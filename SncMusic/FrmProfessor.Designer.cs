@@ -106,6 +106,7 @@
             this.button1.TabIndex = 46;
             this.button1.Text = "Incluir";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // label5
             // 
