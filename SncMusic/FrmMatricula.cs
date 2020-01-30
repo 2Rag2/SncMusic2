@@ -12,34 +12,30 @@ namespace SncMusic
 {
     public partial class FrmMatricula : Form
     {
+        public FrmMatricula()
+        {
+            InitializeComponent();
+        }
+
+        private void cmbAluno_DropDown(object sender, EventArgs e)
+        {
+            Matricula curso = new Matricula();
+            var dr = curso.ListarTodos();
+            DataTable dt = new DataTable();
+            dt.Load(dr);
+            cmbAluno.DataSource = dt;
+            cmbAluno.DisplayMember = "nome_aluno";
+            cmbAluno.ValueMember = "id_aluno";
+        }
+
+        private void cmbAluno_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void cmbCurso_DropDown(object sender, EventArgs e)
         {
-            Matricula matricula = new Matricula();
-            var dr = matricula.ListarTodos();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            cmbCurso.DataSource = dt;
-            cmbCurso.DisplayMember = "nome_curso";
-            cmbCurso.ValueMember = "id_curso";
-        }
-    }
-    public MySqlDataReader ListarTodos()
-    {
-        MySqlDataReader dr;
-        try
-        {
-            var comm = Banco.Abrir();
-            comm.CommandText = "select * from tb_curso";
-            dr = comm.ExecuteReader();
-            return dr;
-
 
         }
-        catch (Exception)
-        {
-            return dr = null;
-        }
-
     }
 }

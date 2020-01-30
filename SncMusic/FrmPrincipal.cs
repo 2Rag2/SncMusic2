@@ -55,5 +55,17 @@ namespace SncMusic
             frmUsuario.MdiParent = this;
             frmUsuario.Show();
         }
+
+        private void matriculaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void novaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmMatricula frmMatricula = new FrmMatricula();
+            frmMatricula.MdiParent = this;
+            frmMatricula.Show();
+        }
     }
 }

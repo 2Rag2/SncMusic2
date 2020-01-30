@@ -39,11 +39,13 @@
             this.cursosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuáriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.turmasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.matriculaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manutençãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.novaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +71,8 @@
             this.professoresToolStripMenuItem,
             this.cursosToolStripMenuItem,
             this.usuáriosToolStripMenuItem,
-            this.turmasToolStripMenuItem});
+            this.turmasToolStripMenuItem,
+            this.matriculaToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.cadastrosToolStripMenuItem.Text = "&Cadastros";
@@ -133,6 +136,15 @@
             this.turmasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.turmasToolStripMenuItem.Text = "&Turmas";
             // 
+            // matriculaToolStripMenuItem
+            // 
+            this.matriculaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.novaToolStripMenuItem});
+            this.matriculaToolStripMenuItem.Name = "matriculaToolStripMenuItem";
+            this.matriculaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.matriculaToolStripMenuItem.Text = "Matricula";
+            this.matriculaToolStripMenuItem.Click += new System.EventHandler(this.matriculaToolStripMenuItem_Click);
+            // 
             // operaçãoToolStripMenuItem
             // 
             this.operaçãoToolStripMenuItem.Name = "operaçãoToolStripMenuItem";
@@ -162,6 +174,13 @@
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
             this.sairToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.sairToolStripMenuItem.Text = "&Sair";
+            // 
+            // novaToolStripMenuItem
+            // 
+            this.novaToolStripMenuItem.Name = "novaToolStripMenuItem";
+            this.novaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.novaToolStripMenuItem.Text = "Nova";
+            this.novaToolStripMenuItem.Click += new System.EventHandler(this.novaToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
@@ -199,6 +218,8 @@
         private System.Windows.Forms.ToolStripMenuItem usuáriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem turmasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem matriculaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem novaToolStripMenuItem;
     }
 }
 
