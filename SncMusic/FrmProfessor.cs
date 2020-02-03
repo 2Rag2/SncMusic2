@@ -17,106 +17,7 @@ namespace SncMusic
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-          
-            mskCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-
-            Professor professor = new Professor( txtNome.Text , mskCPF.Text, txtEmail.Text, mskTelefone.Text);
-            professor.Inserir();
-
-            MessageBox.Show("professor Gravado com Sucesso!");
-            LimpaControles();
-
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            //se text do botâo for igual a "..."
-            if (btnBuscar.Text == "...")
-            {
-                //alterar o texto do botão para "Buscar"
-                btnBuscar.Text = "buscar";
-                //tornar o textid readonly true
-                txtId.Enabled = true;
-                //tornar o textid readonly false
-                txtId.ReadOnly = false;
-                //colocar o foco (cursor) no txtid e limpe
-                txtId.Focus();
-                txtId.Clear();
-            }
-            //senao
-            else
-            {
-                //se txtid for diferente de vazio então consulte o professor
-                if (txtId.Text != string.Empty)
-                {
-                    Professor professor = new Professor();
-                    professor.ConsultarPorId(Convert.ToInt32(txtId.Text));
-                    txtEmail.Text = professor.Email;
-                    mskCPF.Text = professor.cpf;
-                    mskTelefone.Text = professor.Telefone;
-                    txtNome.Text = professor.Nome;
-                   
-                    //altee o texto do botão para"..."
-                    btnBuscar.Text = "...";
-                    //tornar o txtid enable flase
-                    txtId.Enabled = false;
-                    //tornar o textid readonly true
-                    txtId.ReadOnly = true;
-                }
-
-            }
-        }
-
-        private void txtId_TextChanged(object sender, EventArgs e)
-        {
-            if (txtId.Text != string.Empty)
-            {
-                btnAlterar.Enabled = true;
-            }
-            else
-            {
-                btnAlterar.Enabled = false;
-            }
-        }
-
-        private void btnAlterar_Click(object sender, EventArgs e)
-        {
-            
-          
-            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            Professor professor = new Professor();
-            if (professor.alterar(new Professor(Convert.ToInt32(txtId.Text), txtNome.Text, mskTelefone.Text)))
-            {
-                //var comm = Banco.Abrir();
-                //comm.CommandText = "update tb_professor set nome_professor = '" + txtNome.Text + "'," +
-                //    "sexo_professor = '" + sexo + "', telefone_professor = '" + mskTelefone.Text +
-                //    "'where id_professor = " + txtId.Text;
-                //comm.ExecuteNonQuery();
-                //comm.Connection.Close();
-                MessageBox.Show("Dados do professor alterados com Sucesso!");
-                LimpaControles();
-
-            }
-            else
-            {
-                MessageBox.Show("erro");
-            }
-
-
-        }
-
-        private void Frmprofessor_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnExcluir_Click(object sender, EventArgs e)
-        {
-
-        }
+   
         private void LimpaControles()
         {
             txtId.Clear();
@@ -145,9 +46,66 @@ namespace SncMusic
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnInclui_Click(object sender, EventArgs e)
         {
+            mskCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            Professor professor = new Professor(txtNome.Text, mskCPF.Text, txtEmail.Text, mskTelefone.Text);
+            professor.Inserir();
+            MessageBox.Show("Professor Gravado com sucesso!");
+            LimpaControles();
+        }
 
+        private void btnAlterar_Click_1(object sender, EventArgs e)
+        {
+            mskTelefone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            Professor professor = new Professor();
+            if (professor.alterar(new Professor(Convert.ToInt32(txtId.Text), txtNome.Text, mskTelefone.Text)))
+            {
+                MessageBox.Show("Dados do Professor alterados com sucesso!");
+                LimpaControles();
+            }
+            else
+                MessageBox.Show("Falha ao alterar dados do professor!");
+        }
+
+        private void btnBuscar_Click_1(object sender, EventArgs e)
+        {
+            // se o text do botão for igual a "..."
+            if (btnBuscar.Text == "...")
+            {
+                //alterar o texto do botão para "Buscar"
+                btnBuscar.Text = "Buscar";
+                //tornar o txtid Enable true
+                txtId.Enabled = true;
+                //tornar o txtid readonly false
+                txtId.ReadOnly = false;
+                //colocar o foco (cursor) no txtid e limpe
+                txtId.Focus();
+                txtId.Clear();
+            }
+            //senão
+            else
+            {
+                //se txtid for diferente de vazio então consulte o professor
+                if (txtId.Text != string.Empty)
+                {
+                    Professor professor = new Professor();
+                    professor.ConsultarPorId(Convert.ToInt32(txtId.Text));
+                    txtEmail.Text = professor.Email;
+                    mskCPF.Text = professor.Cpf;
+                    mskTelefone.Text = professor.Telefone;
+                    txtNome.Text = professor.Nome;
+
+
+                    //altere o texto do botão para "..."
+                    btnBuscar.Text = "...";
+                    //tornar o txtid Enable false
+                    txtId.Enabled = false;
+                    //tornar o txtid readonly true
+                    txtId.ReadOnly = true;
+                }
+            }
         }
     }   
     

@@ -12,73 +12,63 @@ namespace SncMusic
     public class Professor
     {
         // atributos e propriedades
-        public int id { get; set; }
+        private int id;
+        // atributos e propriedades
+        //public int Id { get; }
         public string Nome { get; set; }
-        public string cpf { get; set; }
-        public string sexo { get; set; }
+        public string Cpf { get; set; }
+
         public string Email { get; set; }
         public string Telefone { get; set; }
         public DateTime DataCadastro { get; set; }
-        public string Cpf { get; internal set; }
+        public int Id { get => id; set => id = value; }
 
         // metodos construtores
-        public Professor(int _id, string _nome, string _email, string _cpf, string _sexo, string _telefone, DateTime _dataCadastro)
-        {
-            id = _id;
-            Nome = _nome;
-            cpf = _cpf;
-            sexo = _sexo;
-            Telefone = _telefone;
-            DataCadastro = _dataCadastro;
-            Email = _email;
-
-        }
-        public Professor(string _nome, string _email, string _cpf, string _telefone)
-        {
-
-            Nome = _nome;
-            cpf = _cpf;        
-            Telefone = _telefone;
-            Email = _email;
-
-        }
-        public Professor(int _id, string _nome,string _telefone)
-        {
-
-            Nome = _nome;           
-            Telefone = _telefone;
-            id = _id;
-
-        }
-
-        public Professor(int _id, string _nome, string _cpf, string _email)
-        {
-
-            Nome = _nome;
-            Cpf = _cpf;
-            id = _id;
-            Email = _email;
-
-        } 
-
         public Professor()
         {
 
-
+        }
+        public Professor(int _id, string _nome, string _cpf, string _email, string _telefone, DateTime _dataCadastro)
+        {
+            Id = _id;
+            Nome = _nome;
+            Cpf = _cpf;
+            Telefone = _telefone;
+            Email = _email;
+            DataCadastro = _dataCadastro;
+        }
+        public Professor(string _nome, string _cpf, string _email, string _telefone)
+        {
+            Nome = _nome;
+            Cpf = _cpf;
+            Telefone = _telefone;
+            Email = _email;
+        }
+        public Professor(int _id, string _nome, string _telefone)
+        {
+            Nome = _nome;
+            Telefone = _telefone;
+            Id = _id;
+        }
+        public Professor(int _id, string _nome, string _cpf, string _email)
+        {
+            Nome = _nome;
+            Cpf = _cpf;
+            Id = _id;
+            Email = _email;
         }
         //métodos da classe
         public void Inserir()
         {
             MySqlCommand comm = Banco.Abrir();
-            comm.CommandText = "insert into tb_Professor values (0,@nome,@cpf,@sexo,@email,@telefone,default)";
+            comm.CommandText = "insert into tb_professor values (0,@nome,@cpf,@email,@telefone,default)";
             comm.Parameters.Add("@nome", MySqlDbType.VarChar).Value = Nome;
-            comm.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = cpf;
-            comm.Parameters.Add("@sexo", MySqlDbType.VarChar).Value = sexo;
+            comm.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = Cpf;
             comm.Parameters.Add("@email", MySqlDbType.VarChar).Value = Email;
             comm.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = Telefone;
             comm.ExecuteNonQuery();
             comm.CommandText = "select @@identity";
-            id = Convert.ToInt32(comm.ExecuteScalar());
+            Id = Convert.ToInt32(comm.ExecuteScalar());
             comm.Connection.Close();
         }
         public bool alterar(Professor Professor)
@@ -86,10 +76,9 @@ namespace SncMusic
             try //Bloco de tratamento de excessão
             {
                 var comm = Banco.Abrir();
-                comm.CommandText = "update tb_Professor set nome_Professor = @nome,sexo_Professor = @sexo,telefone_Professor = @telefone where id_Professor = @id";
+                comm.CommandText = "update tb_Professor set nome_Professor = @nome,telefone_Professor = @telefone where id_Professor = @id";
                 comm.Parameters.Add("@nome", MySqlDbType.VarChar).Value = Professor.Nome;
-                comm.Parameters.Add("@id", MySqlDbType.VarChar).Value = Professor.id;
-                comm.Parameters.Add("@sexo", MySqlDbType.VarChar).Value = Professor.sexo;
+                comm.Parameters.Add("@id", MySqlDbType.VarChar).Value = Professor.id;             
                 comm.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = Professor.Telefone;
                 comm.ExecuteNonQuery();
                 comm.Connection.Close();
@@ -114,30 +103,27 @@ namespace SncMusic
             while (dr.Read())
             {
                 Nome = dr.GetString(1);
-                Email = dr.GetString(4);
-                Cpf = dr.GetString(2);
-                sexo = dr.GetString(3);
-                Telefone = dr.GetString(5);
-                DataCadastro = Convert.ToDateTime(dr.GetValue(6));
+                Email = dr.GetString(3);
+                Cpf = dr.GetString(2);            
+                Telefone = dr.GetString(4);
+                DataCadastro = Convert.ToDateTime(dr.GetValue(5));
             }
-            //Banco.Fechar();
+            Banco.Fechar();
 
         }
         public List<Professor> ListarTodos()
         {
             List<Professor> listaProfessor = new List<Professor>();
             var comm = Banco.Abrir();
-            comm.CommandText = "select * from tb_Professor where id_Professor order by 2 = ";
+            comm.CommandText = "select * from tb_professor order by 2 ";
             var dr = comm.ExecuteReader();
             while (dr.Read())
             {
                 listaProfessor.Add(new Professor(dr.GetInt32(0),
-                 dr.GetString(1),
-                 dr.GetString(2),
-                 dr.GetString(3),
-                 dr.GetString(4),
-                 dr.GetString(5),
-                 Convert.ToDateTime(dr.GetValue(6))));
+                  dr.GetString(1),
+                 dr.GetString(2), dr.GetString(3),
+                 dr.GetString(4),               
+                 Convert.ToDateTime(dr.GetValue(5))));
 
                 //Professor Professor = new Professor();
                 //Professor.id = dr.GetInt32(0);
@@ -153,6 +139,44 @@ namespace SncMusic
             return listaProfessor;
 
 
+        }
+        public DataTable ListarPorIdNaoAssociado(string idCurso)
+        {
+            DataTable dtProfessor = new DataTable();
+
+
+            var comm = Banco.Abrir();
+            comm.CommandText = "select professor_id_professor from tb_professor_curso where curso_id_curso =" + idCurso;
+            var dr = comm.ExecuteReader(); //executa a consulta no banco de dados
+            List<int> ProfAssoc = new List<int>(); // declara lista de inteiros para armazenar id já associados
+
+            if (dr.HasRows)// verifica se a consulta retonou valores
+            {
+                while (dr.Read()) //eanquanto exisitirem linhas de resultado
+                {
+                    ProfAssoc.Add(dr.GetInt32(0)); // associa as linhas à coleção
+                }// fim enquanto
+                dr.Close(); // fecha o leitor de dados
+                dtProfessor.Columns.Add("id_professor", typeof(int));
+                dtProfessor.Columns.Add("nome_professor", typeof(string));
+                comm.CommandText = "select id_professor, nome_professor from tb_professor";
+                dr = comm.ExecuteReader();
+                while (dr.Read())
+                {
+                    if (!ProfAssoc.Contains(dr.GetInt32(0)))
+                        dtProfessor.Rows.Add(dr.GetInt32(0), dr.GetString(1));
+                }
+
+            }
+            else
+            {
+                dr.Close();
+                comm.CommandText = "select id_professor, nome_professor from tb_professor";
+                dtProfessor.Load(comm.ExecuteReader());
+            }
+
+
+            return dtProfessor;
         }
     }
 }

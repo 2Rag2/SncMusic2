@@ -116,5 +116,10 @@ namespace SncMusic
                 MessageBox.Show("erro");
             }
         }
+
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

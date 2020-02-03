@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Data;
+using MySql.Data;
 
 namespace SncMusic
 {
@@ -121,7 +123,7 @@ namespace SncMusic
             try
             {
                 var comm = Banco.Abrir();
-                comm.CommandText = "select * from tb_curso where nome_curso like '%@carac%'";
+                comm.CommandText = "select * from tb_curso where nome_curso like '%@caracter%'";
                 comm.Parameters.Add("@carac", MySqlDbType.VarChar).Value = caracteres;
                 var dr = comm.ExecuteReader();
                 while (dr.Read())
@@ -193,8 +195,9 @@ namespace SncMusic
             catch (Exception)
             {
                return dr = null;
-            }
-            
-        }      
+            }            
+        }  
+      
+
     }  
 }

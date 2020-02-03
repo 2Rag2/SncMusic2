@@ -97,5 +97,20 @@ namespace SncMusic
             //Banco.Fechar();
 
         }
+        public MySqlDataReader ListarTodos()
+        {
+            MySqlDataReader dr;
+            try
+            {
+                var comm = Banco.Abrir();
+                comm.CommandText = "select * from tb_usuario";
+                dr = comm.ExecuteReader();
+                return dr;
+            }
+            catch (Exception)
+            {
+                return dr = null;
+            }
+        }
     }
 }

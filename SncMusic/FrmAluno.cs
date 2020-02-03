@@ -120,7 +120,7 @@ namespace SncMusic
             }
             else
             {
-                MessageBox.Show("erro");
+                MessageBox.Show("Falha ao alterar dados do aluno!");
             }
 
 
@@ -190,6 +190,16 @@ namespace SncMusic
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (textBox1.Text.Length > 1)
+            {
+                listBox1.Items.Clear();
+                Aluno aluno = new Aluno();
+                var dr = aluno.ListarTodos(textBox1.Text);
+                while (dr.Read())
+                {
+                    listBox1.Items.Add(dr.GetString(1));
+                }
+            }
 
         }
     }
